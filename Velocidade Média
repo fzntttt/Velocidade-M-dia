@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // Declarar ponteiros para deslocamento e tempo
+    double *deslocamento;
+    double *tempo;
+    double *velocidade_media;
+
+    // Alocar memória dinamicamente
+    deslocamento = (double *)malloc(sizeof(double));
+    tempo = (double *)malloc(sizeof(double));
+    velocidade_media = (double *)malloc(sizeof(double));
+
+    // Verificar se a alocação de memória foi bem-sucedida
+    if (deslocamento == NULL || tempo == NULL || velocidade_media == NULL) {
+        printf("Erro na alocação de memória.\n");
+        exit(1);
+    }
+
+    // Solicitar ao usuário para inserir o deslocamento e o tempo
+    printf("Digite o deslocamento (em metros): ");
+    scanf("%lf", deslocamento);
+
+    printf("Digite o tempo (em segundos): ");
+    scanf("%lf", tempo);
+
+    // Verificar se o tempo é zero para evitar divisão por zero
+    if (*tempo == 0) {
+        printf("O tempo não pode ser zero.\n");
+        // Liberar a memória alocada
+        free(deslocamento);
+        free(tempo);
+        free(velocidade_media);
+        exit(1);
+    }
+
+    // Calcular a velocidade média
+    *velocidade_media = *deslocamento / *tempo;
+
+    // Exibir o resultado
+    printf("A velocidade média é: %.2f metros por segundo\n", *velocidade_media);
+
+    // Liberar a memória alocada
+    free(deslocamento);
+    free(tempo);
+    free(velocidade_media);
+
+    return 0;
+}
